@@ -1,0 +1,33 @@
+<%- include("partials/header.ejs") %>
+      <div class="container-fluid">
+        <div class="box" id="heading">
+          <% const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];%>
+          <% const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]; %>
+          <% if(locals.list=="today") { %>
+            <h1 ><%= days[new Date().getDay()] %>, <%= months[new Date().getMonth()] %> <%= new Date().getDate() %></h1>
+          <%  } else { %>
+            <h1><%= list %></h1>
+         <% } %> 
+        </div>
+        <div class="box">
+            <% items.forEach(item => { %>
+            <form action="/delete" method="post">
+              <div class="item">
+              <input type="checkbox" onChange="this.form.submit()" name="deletedItem" value=<%=item._id %>>
+                <p><%= item.name %></p>
+              </div>
+              <input type="hidden" name="ListName" value = <%= list %>>
+            </form>
+            <% }); %>
+            <form class="item" action="/" method="post">
+              <% if(locals.err) {%>
+                <input type="text" name="newItem" placeholder='<%= err %>'>
+                <% } else { %>
+                <input type="text" name="newItem" placeholder="New Item">
+                  <% } %>
+                <button type="submit" name="list" value=<%= list %>>+</button>
+            </form>
+        </div>
+            
+    </div>
+<%- include("partials/footer.ejs") %>
