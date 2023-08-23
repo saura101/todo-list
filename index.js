@@ -16,7 +16,7 @@ let lastDate= {
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
 
-mongoose.connect("mongodb://127.0.0.1:27017/todoDB");
+mongoose.connect("mongodb+srv://souradeepghosh00:OSwVF4O67HmSskOk@cluster0.syqwkg1.mongodb.net/todoDB");
 
 const itemSchema= new mongoose.Schema ({
     name : {
